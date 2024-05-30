@@ -2,60 +2,42 @@ package mission1;
 import java.util.*;
 
 public class BookManager {
-public List<Book> books = new ArrayList<>();
 	
-	public class Book{
+	// books 배열 선언
+	public List<Book> books;
 	
-		private Integer id; //id
-		private String title; //제목
-		private String author; //저자
-		private int year; //출판 연도
-		
-		public Book (Integer id, String title, String author, int year){
-			this.id=id;
-			this.title=title;
-			this.author=author;
-			this.year=year;
-		}
-		
-		public Integer getId() {
-			return this.id;
-		}
-		
-		public String getTitle() {
-			return this.title;
-		}
-		
-		public String getAuthor() {
-			return this.author;
-		}
-		
-		public int getYear() {
-			return this.year;
-		}	
-
-		public static final Comparator<Book> id_order=new IdComparator();
-		
-		private static class IdComparator implements Comparator<Book>{
-			public int compare(Book b1, Book b2) {
-				return (b1.id>b2.id)?1:(b1.id<b2.id)?-1:0;
-			}
-		}
+	// books 초기화
+	public BookManager() {
+		books = new ArrayList<Book>();
 	}
-
+	
+	// 새로운 Comparator 정의
+	public static Comparator<Book> id_comp = new Comparator<Book>() {
+		@Override
+		public int compare(Book b1, Book b2) {
+			return (b1.getId() > b2.getId() ) ? 1 : (b1.getId() < b2.getId()) ? -1 : 0 ;
+		}
+	};
+	
+	// 이진탐색 메소드
 	public void search_bs(Integer srcid) {
-		books x;
-		int idx=Arrays.binarySearch(books, new Book(srcid,"","",0), Book.id_order);
+	
+		// id 순으로 books 정렬
+		Collections.sort(books, id_comp);
 		
-		if(idx<0){
+		// srcid 기준으로 검색 후 idx 반환
+		int search_result = Collections.binarySearch(books, new Book(srcid), id_comp);
+		
+		if (search_result<0){
             System.out.println("검색된 도서가 없습니다.");
 		}
 		else {
-			System.out.println("검색 결과: " + x[idx]);
+			System.out.println("검색 결과: " + this.books.get(search_result));
 		}
 	}
 	
 	
+	// 도서 추가
 	public void addBook(Integer id, String title, String author, int year) {
 		for(Book b: books) {
 			if(id==b.getId()) {
@@ -71,6 +53,7 @@ public List<Book> books = new ArrayList<>();
 		return;
 	}
 	
+	// 도서 검색 -> 불필요하지 않나요??
 	public int searchBook() {
 		System.out.println("검색 결과:");
 		if(books.size()==0) {
@@ -84,6 +67,7 @@ public List<Book> books = new ArrayList<>();
 		return books.size();
 	}
 
+	// 도서 삭제 
 	public void removeBook(Integer id) {
 		for(Book b: books) {
 			if(b.getId()==id) {
