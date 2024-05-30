@@ -9,9 +9,9 @@ public List<Book> books = new ArrayList<>();
 		private Integer id; //id
 		private String title; //제목
 		private String author; //저자
-		private Integer year; //출판 연도
+		private int year; //출판 연도
 		
-		public Book (Integer id, String title, String author, Integer year){
+		public Book (Integer id, String title, String author, int year){
 			this.id=id;
 			this.title=title;
 			this.author=author;
@@ -30,28 +30,43 @@ public List<Book> books = new ArrayList<>();
 			return this.author;
 		}
 		
-		public Integer getYear() {
+		public int getYear() {
 			return this.year;
+		}	
+
+		public static final Comparator<Book> id_order=new IdComparator();
+		
+		private static class IdComparator implements Comparator<Book>{
+			public int compare(Book b1, Book b2) {
+				return (b1.id>b2.id)?1:(b1.id<b2.id)?-1:0;
+			}
 		}
-	
+	}
+
+	public void search_bs(Integer srcid) {
+		books x;
+		int idx=Arrays.binarySearch(books, new Book(srcid,"","",0), Book.id_order);
+		
+		if(idx<0){
+            System.out.println("검색된 도서가 없습니다.");
+		}
+		else {
+			System.out.println("검색 결과: " + x[idx]);
+		}
 	}
 	
-
 	
-	
-	
-	public void addBook(Integer id, String title, String author, Integer year) {
+	public void addBook(Integer id, String title, String author, int year) {
 		for(Book b: books) {
 			if(id==b.getId()) {
 				System.out.println("해당 ID("+id+") 는 이미 존재합니다.");
 			}
-			
-			
 		}
 		
 		Book book = new Book(id, title, author, year);
 		books.add(book);
 		System.out.println("Book{id: '"+id+"', 제목: '"+title+"', 저자: '"+author+"', 출판년도: '"+year+"}도서가 추가되었습니다.");
+	
 		
 		return;
 	}
@@ -68,7 +83,7 @@ public List<Book> books = new ArrayList<>();
 		}
 		return books.size();
 	}
-	
+
 	public void removeBook(Integer id) {
 		for(Book b: books) {
 			if(b.getId()==id) {
