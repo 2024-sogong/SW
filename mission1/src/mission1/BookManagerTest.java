@@ -43,4 +43,14 @@ public class BookManagerTest {
 		assertEquals(1, bookManager.books.size());
 	}
 	
+	@Test
+	void testBinarySearchBook() {
+		System.out.println("\n< Binary Search >");
+		bookManager.addBook(1, "자바 기초", "Jane", 2021);
+		bookManager.addBook(2, "소프트웨어 공학", "Tom", 2014);
+		assertEquals(true, bookManager.search_bs(1));
+		assertEquals(true, bookManager.search_bs(2));
+		assertEquals(false, bookManager.search_bs(3)); // 검색 결과 없음
+	}
+	
 }
