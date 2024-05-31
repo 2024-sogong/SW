@@ -19,7 +19,7 @@ pipeline {
         script{
           // JUnit 5 테스트 실행을 위한 classpath 설정
           // Jenkins work at - C:\ProgramData\Jenkins\.jenkins\workspace\teamproj\
-          def classpath= "classes;lib/;lib/junit-platform-console-standalone-1.9.3.jar"
+          def classpath= "classes;lib/;mission1/lib/junit-platform-console-standalone-1.9.3.jar"
           echo "Classpath: ${classpath}"
           // JUnit 5 테스트 실행
           bat "java -cp ${classpath} org.junit.platform.console.ConsoleLauncher --scan-classpath > test_results.txt"
