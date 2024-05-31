@@ -93,20 +93,20 @@ public class BookManager {
 		searchBook(id);	        
 		long afterTime_1 = System.currentTimeMillis(); // 코드 실행 후 시간
 		long diffTime_1 = (afterTime_1 - beforeTime_1)/1000; //시간 차 계산
-		System.out.println("searchBook 실행 시간 : "+diffTime_1);
+		System.out.println("searchBook 실행 시간 : "+diffTime_1+"초");
 		
 		//search_bs 시간 측정
 		long beforeTime_2 = System.currentTimeMillis(); //코드 실행 전 시간   
 		search_bs(id);	        
 		long afterTime_2 = System.currentTimeMillis(); // 코드 실행 후 시간
 		long diffTime_2 = (afterTime_2 - beforeTime_2)/1000; //시간 차 계산
-		System.out.println("search_bs 실행 시간 : "+diffTime_2);
+		System.out.println("search_bs 실행 시간 : "+diffTime_2+"초");
 		
 		if(diffTime_1<diffTime_2) {
-			System.out.println("searchBook이 "+(diffTime_2-diffTime_1)+" 초 더 빠릅니다.");
+			System.out.println("searchBook이 "+(diffTime_2-diffTime_1)+"초 더 빠릅니다.");
 		}
 		else {
-			System.out.println("search_bs가 "+(diffTime_1-diffTime_2)+" 초 더 빠릅니다.");
+			System.out.println("search_bs가 "+(diffTime_1-diffTime_2)+"초 더 빠릅니다.");
 		}	
 	}
 
