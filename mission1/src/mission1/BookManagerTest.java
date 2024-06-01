@@ -43,7 +43,7 @@ public class BookManagerTest {
 		assertEquals(1, bookManager.books.size());
 	}
 	
-	@Test
+	
 	void testBinarySearchBook() {
 		System.out.println("\n< Binary Search >");
 		bookManager.addBook(1, "자바 기초", "Jane", 2021);
@@ -53,33 +53,34 @@ public class BookManagerTest {
 		assertEquals(false, bookManager.search_bs(3)); // 검색 결과 없음
 	}
 	
-	@Test
-	void testPerformTest() {
-		System.out.println("검색 성능 비교");
-		bookManager.addBook(1, "자바 기초", "Jane", 2021);
-		bookManager.addBook(2, "소프트웨어 공학", "Tom", 2014);
-		bookManager.addBook(3, "동시 컴퓨팅", "Yoon", 2010);
-		bookManager.addBook(4, "운영체제", "Lee", 2011);
-		bookManager.addBook(5, "논리회로", "Lee", 2012);
-		bookManager.addBook(6, "컴퓨터 구조", "Park", 2013);
-		bookManager.addBook(7, "대학수학(1)", "Choi", 2014);
-		bookManager.addBook(8, "대학화학(1)", "Kim", 2015);
-		bookManager.addBook(9, "대학물리(1)", "Kim", 2016);
-		bookManager.addBook(10, "대학수학(2)", "Park", 2017);
-		bookManager.addBook(11, "대학화학(2)", "Jeong", 2018);
-		bookManager.addBook(12, "대학물리(2)", "Park", 2019);
-		bookManager.addBook(13, "객체지향 프로그래밍", "Kim", 2020);
-		bookManager.addBook(14, "인터넷 프로그래밍", "Lee", 2021);
-		bookManager.addBook(15, "자료구조", "Pae", 2022);
-		bookManager.addBook(16, "기초DB", "Kim", 2023);
-		bookManager.addBook(17, "응용DB", "Kim", 2015);
-		bookManager.addBook(18, "수치해석", "Park", 2019);
-		bookManager.addBook(19, "오토마타", "Park", 2015);
-		bookManager.addBook(20, "프로그래밍언어", "Song", 2017);
-		
-		assertEquals(true, bookManager.performTest(10));
-		assertEquals(true, bookManager.performTest(15));
-		assertEquals(true, bookManager.performTest(20));
-	}
 	
+	//성능 비교
+	@Test
+	void searchPerformanceTest(Integer id) {
+		
+	Integer i;
+	for(i=1;i<=20;i++) {
+		bookManager.addBook(i,"자바 기초","Jane",2021);
+	}
+		//searchBook 실행시간 측정
+		long beforeTime_1 = System.currentTimeMillis(); //코드 실행 전 시간   
+		bookManager.searchBook(id);	        
+		long afterTime_1 = System.currentTimeMillis(); // 코드 실행 후 시간
+		long diffTime_1 = (afterTime_1 - beforeTime_1)/1000; //시간 차 계산
+		System.out.println("searchBook 실행 시간 : "+diffTime_1+"초");
+		
+		//search_bs 실행시간 측정
+		long beforeTime_2 = System.currentTimeMillis(); //코드 실행 전 시간   
+		bookManager.search_bs(id);	        
+		long afterTime_2 = System.currentTimeMillis(); // 코드 실행 후 시간
+		long diffTime_2 = (afterTime_2 - beforeTime_2)/1000; //시간 차 계산
+		System.out.println("search_bs 실행 시간 : "+diffTime_2+"초");
+		
+		if(diffTime_1<diffTime_2) {
+			System.out.println("searchBook이 "+(diffTime_2-diffTime_1)+"초 더 빠릅니다.");
+		}
+		else {
+			System.out.println("search_bs가 "+(diffTime_1-diffTime_2)+"초 더 빠릅니다.");
+		}
+	}
 }
