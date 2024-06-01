@@ -45,22 +45,20 @@ public class BookManager {
 	// 도서 추가
 	public void addBook(Integer id, String title, String author, int year) {
 		for(Book b: books) {
-			if(id == b.getId()) {
+			if(id.equals( b.getId())) {
 				System.out.println("해당 ID("+id+") 는 이미 존재합니다.");
 				return;
 			}
 		}
 		Book book = new Book(id, title, author, year);
 		books.add(book);
-		System.out.println("Book{id: '"+id+"', 제목: '"+title+"', 저자: '"+author+"', 출판연도: "
-				+year+"}도서가 추가되었습니다.");
 		return;
 	}
 	
 	// 도서 검색 -> 이진탐색과 성능 비교 필요
 	public boolean searchBook(Integer id) {		
 		for(Book b:books) {
-			if(b.getId() == id) {
+			if(b.getId().equals(id)) {
 				System.out.println("검색 결과:");
 				System.out.println("Book{id: '"+b.getId()+"', 제목: '"+b.getTitle()+"', 저자: '"
 						+b.getAuthor()+"', 출판연도: "+b.getYear()+"}");
@@ -74,16 +72,14 @@ public class BookManager {
 	// 도서 삭제 
 	public void removeBook(Integer id) {
 		for(Book b: books) {
-			if(b.getId() == id) {
+			if(b.getId().equals(id)) {
 				books.remove(b);
 				System.out.println("Book{id: '"+b.getId()+"', 제목: '"+b.getTitle()+"', 저자: '"
 						+b.getAuthor()+"', 출판연도: "+b.getYear()+"}도서를 삭제했습니다.");
 				return;
 			}
-			
 		}
 		System.out.println("해당 ID("+id+")의 도서를 찾을 수 없습니다.");
 		return;
 	}
-
 }
