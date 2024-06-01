@@ -5,6 +5,8 @@ pipeline {
       steps {
         // 소스코드 체크아웃
         checkout scm
+        echo JAVA_HOME=%JAVA_HOME%
+        echo PATH=%PATH%
       }
     }
     stage('Build') {
