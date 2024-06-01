@@ -86,7 +86,7 @@ public class BookManager {
 		return;
 	}
 	
-	public void performTest(Integer id) {
+	public boolean performTest(Integer id) {
 		
 		//searchBook 시간 측정
 		long beforeTime_1 = System.currentTimeMillis(); //코드 실행 전 시간   
@@ -104,9 +104,11 @@ public class BookManager {
 		
 		if(diffTime_1<diffTime_2) {
 			System.out.println("searchBook이 "+(diffTime_2-diffTime_1)+"초 더 빠릅니다.");
+			return true;
 		}
 		else {
 			System.out.println("search_bs가 "+(diffTime_1-diffTime_2)+"초 더 빠릅니다.");
+			return true;
 		}	
 	}
 
