@@ -77,9 +77,9 @@ public class BookManagerTest {
 		bookManager.addBook(19, "오토마타", "Park", 2015);
 		bookManager.addBook(20, "프로그래밍언어", "Song", 2017);
 		
-		assertEquals(true,bookManager.performTest(10));
-		assertEquals(true,bookManager.performTest(15));
-		assertEquals(true,bookManager.performTest(20));
+		assertEquals(true, bookManager.performTest(10));
+		assertEquals(true, bookManager.performTest(15));
+		assertEquals(true, bookManager.performTest(20));
 	}
 	
 }
