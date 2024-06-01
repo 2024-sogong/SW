@@ -52,8 +52,6 @@ public class BookManager {
 		}
 		Book book = new Book(id, title, author, year);
 		books.add(book);
-		System.out.println("Book{id: '"+id+"', 제목: '"+title+"', 저자: '"+author+"', 출판연도: "
-				+year+"}도서가 추가되었습니다.");
 		return;
 	}
 	
